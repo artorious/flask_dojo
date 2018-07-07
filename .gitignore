@@ -1,0 +1,5 @@
+__pycache__
+*.pyc
+*.swp
+instance/
+PR_template.md

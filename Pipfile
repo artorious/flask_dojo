@@ -8,6 +8,8 @@ url = "https://pypi.org/simple"
 [packages]
 ipython = "*"
 flask = "*"
+pylint = "*"
+pycodestyle = "*"
 
 [requires]
 python_version = "3.5"

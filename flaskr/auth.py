@@ -34,7 +34,7 @@ def register():
         elif not password:
             error = 'Password is required.'
         elif db.execute(
-            'SELECT id FROM user WHERE username = ?', (username,)
+                'SELECT id FROM user WHERE username = ?', (username,)
         ).fetchone() is not None:
             # validate that username is not already registered by querying the
             # database and checking if a result is returned
@@ -63,8 +63,8 @@ def register():
 # Associate URL/login with the login view function
 @bp.route('/login', methods=('GET', 'POST'))
 def login():
-    """ login view 
-        
+    """ login view
+
         When the user visits the /auth/login URL, the login view will
         return HTML with a form for them to fill out. When they submit the
         form, it will validate their input and either show the form again with
@@ -107,10 +107,10 @@ def login():
 @bp.before_app_request
 def load_logged_in_user():
     """ Runs before the view function no matter what URL is requested.
-    
-        Checks if a <user_id> is stored in the <session> and gets that user's data
-        from the database, storing it on <g.user>, which lasts for the length
-        of the request.
+
+        Checks if a <user_id> is stored in the <session> and gets that user's 
+        data from the database, storing it on <g.user>, which lasts for the
+        length of the request.
     """
     user_id = session.get('user_id')
 
@@ -127,4 +127,20 @@ def logout():
     """ Removes the user id from the session. """
     session.clear()
     return redirect(url_for('index'))
+
+
+def login_required(view):
+    """ Require authentification in other views. """
+    @functools.wraps(view)
+    def wrapped_view(**kwargs):
+        """ Checks if a user is loaded and redirects to the login page
+            otherwise. If a user is loaded the original view is called and
+            continues normally.
+        """
+        if g.user is None:
+            return redirect(url_for('auth.login'))
+
+        return view(**kwargs)
+
+    return wrapped_view
 

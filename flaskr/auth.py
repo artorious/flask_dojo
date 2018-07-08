@@ -15,8 +15,15 @@ bp = Blueprint('auth', __name__, url_prefix='/auth')
 # Associate URL/register with the register view function
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
+    """ register view
+
+        When the user visits the /auth/register URL, the register view will
+        return HTML with a form for them to fill out. When they submit the
+        form, it will validate their input and either show the form again with
+        an error message or create the new user and go to the login page
+    """
     if request.method == 'POST':
-        # User submitted the login form - validate data
+        # User submitted the registration form - validate data
         username = request.form['username']
         password = request.form['password']
         db = get_db()
@@ -51,4 +58,66 @@ def register():
         flash(error)
     # HTML page with registration form
     return render_template('auth/register.html')
+
+
+# Associate URL/login with the login view function
+@bp.route('/login', methods=('GET', 'POST'))
+def login():
+    """ login view 
+        
+        When the user visits the /auth/login URL, the login view will
+        return HTML with a form for them to fill out. When they submit the
+        form, it will validate their input and either show the form again with
+        an error message or redirect the user to the index/home page
+    """
+    if request.method == 'POST':
+        # User submitted the login form - validate login data for correctness
+        username = request.form['username']
+        password = request.form['password']
+        db = get_db()
+        error = None
+        # query the user and assign to variable
+        user = db.execute(
+            'SELECT * FROM user WHERE username = ?', (username,)
+        ).fetchone()
+
+        if user is None:
+            # Non-registered username
+            error = 'Incorrect username.'
+        elif not check_password_hash(user['password'], password):
+            # Hash submitted password in the same way as the stored hash and
+            # securely compare them. a match means valid password
+            error = 'Incorrect password.'
+
+        if error is None:
+            # Session is a dict that stores data scross requests. When
+            # validation succeeds, the user's <id> is stored in a new session.
+            # The data is stored on a cookie that is sent to the browser, and
+            # the browser then sends it back with subsequent requests. Flask
+            # securely signs the data to prevent tampering
+            session.clear()
+            session['user_id'] = user['id']
+            return redirect(url_for('index'))
+
+        flash(error)
+
+    return render_template('auth/login.html')
+
+
+@bp.before_app_request
+def load_logged_in_user():
+    """ Runs before the view function no matter what URL is requested.
+    
+        Checks if a <user_id> is stored in the <session> and gets that user's data
+        from the database, storing it on <g.user>, which lasts for the length
+        of the request.
+    """
+    user_id = session.get('user_id')
+
+    if user_id is None:
+        g.user = None
+    else:
+        g.user = get_db().execute(
+            'SELECT * FROM user WHERE id = ?', (user_id,)
+        ).fetchone()
 

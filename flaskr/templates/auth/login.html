@@ -1,0 +1,18 @@
+<!--Tells Jinja that this template should replace the blocks from the base template -->
+{% extends 'base.html' %}
+<!-- Set the title block & then output the value of it into the header block,
+  so that both window and page share the same title
+-->
+{% block header %}
+  <h1>{% block title %}Log In{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+    <label for="username">Username</label>
+    <input name="username" id="username" required>
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password" required>
+    <input type="submit" value="Log In">
+  </form>
+{% endblock %}

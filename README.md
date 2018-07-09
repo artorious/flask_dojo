@@ -1,4 +1,7 @@
-# Flask Tutorials [Docs](http://flask.pocoo.org/docs/1.0/)
+# [Flask Tutorials](http://flask.pocoo.org/docs/1.0/)
+
+![](http://flask.pocoo.org/docs/1.0/_images/logo-full.png)
+<hr>
 
 1. Flaskr - A basic blog application
 Features:
@@ -6,7 +9,6 @@ Features:
 * User login
 * Create, Edit or Delete Posts
 
-![](http://flask.pocoo.org/docs/1.0/_images/logo-full.png)
 `
 ### Attribution
 [Flaskr](http://flask.pocoo.org/docs/1.0/tutorial/#tutorial)

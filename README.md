@@ -3,7 +3,7 @@
 ![](http://flask.pocoo.org/docs/1.0/_images/logo-full.png)
 <hr>
 
-1. Flaskr - A basic blog application
+## Flaskr - A basic blog application
 Features:
 * User registration
 * User login

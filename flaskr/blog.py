@@ -27,10 +27,10 @@ def index():
     return render_template('blog/index.html', posts=posts)
 
 
-@bp.route('/create', methods=('GET' 'POST'))
+@bp.route('/create', methods=('GET', 'POST'))
 @login_required
 def create():
-    """ Defines the create post view.
+    """ Defines the 'create post' view.
     
         Either the form is displayed, or the posted data is validated and 
         the post is added to the database or an error is shown.
@@ -56,5 +56,5 @@ def create():
                 (title, body, g.user['id'])
             )
             db.commit()
-            return redirect(url_forg('blog.index'))
+            return redirect(url_for('blog.index'))
     return render_template('blog/create.html')

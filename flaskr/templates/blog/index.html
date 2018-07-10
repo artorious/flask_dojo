@@ -17,10 +17,10 @@
             by {{ post['username'] }} on {{ post['created'].strftime('%Y-%m-%d') }}
           </div>
         </div>
-        <!--When the user is the author of a post, they’ll see an “Edit” link to the 
+        <!--When the user is the author of a post, they’ll see an “Edit” link to the an “Edit” link to the 
           update view for that post.
         -->
-        {% if g.user['id'] == post['author'] %}
+        {% if g.user['id'] == post['author_id'] %}
           <a class="action" href="{{ url_for('blog.update', id=post['id']) }}">Edit</a>
         {% endif %}
       </header>

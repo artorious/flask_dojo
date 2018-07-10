@@ -3,3 +3,4 @@ __pycache__
 *.swp
 instance/
 PR_template.md
+*.egg-info/

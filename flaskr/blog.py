@@ -58,3 +58,23 @@ def create():
             db.commit()
             return redirect(url_for('blog.index'))
     return render_template('blog/create.html')
+
+
+def get_post(id, check_author=True):
+    """ Fetch a post by <id> and check if the author matches 
+        the logged in user.
+    """
+    post = get_db().execute(
+            'SELECT p.id, title, body, created, author_id, username'
+            ' FROM post p JOIN user u ON p.author_id = u.id'
+            ' WHERE p.id = ?', (id,)
+    ).fetchone()
+    # Handle unkown/unathorized users by raising exceptions
+    if post is None:
+        abort(404, "Post id {0} doesn't exist.".format(id))
+
+    if check_author and post['author_id'] != g.user['id']:
+        abort(403)
+
+    return post
+

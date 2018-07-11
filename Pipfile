@@ -11,6 +11,10 @@ flask = "*"
 pylint = "*"
 pycodestyle = "*"
 "e1839a8" = {path = ".", editable = true}
+pytest = "*"
+coverage = "*"
+pytest-cache = "*"
+"pytest-pep8" = "*"
 
 [requires]
 python_version = "3.5"

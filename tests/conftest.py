@@ -53,3 +53,30 @@ def runner(app):
     """
     return app.test_cli_runner()
 
+
+class AuthActions(object):
+    """ Make a POST request to the login view with the client """
+    def __init__(self, client):
+        self._client = client
+
+    def login(self, username='test', password='test'):
+        """ Log in as test user """
+        return self._client.post(
+            '/auth/login',
+            data={'username': username, 'password': password}
+        )
+
+    
+    def logout(self):
+        """ Log out user """
+        return self._client.get('/auth/logout')
+
+
+@pytest.fixture
+def auth(client):
+    """ With the auth fixture, you can call auth.login() in a test to log 
+        in as the test user, which was inserted as part of the test 
+        data in the app fixture.
+    """
+    return AuthActions(client)
+

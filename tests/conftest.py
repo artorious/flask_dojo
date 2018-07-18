@@ -1,3 +1,4 @@
+""" Tests setup and fixtures """
 import os
 import tempfile
 
@@ -13,7 +14,7 @@ with open(os.path.join(os.path.dirname(__file__), 'data.sql'), 'rb') as f:
 @pytest.fixture
 def app():
     """ Create and open a temporary file returning the file object and the path
-        to it. The database path is overridden so it points to this temporary 
+        to it. The database path is overridden so it points to this temporary
         path instead of the instatnce folder. TESTING tells flask that the app
         is in testing mode. After setting the path,
         the database Tables are created and the test data is inserted.
@@ -66,7 +67,7 @@ class AuthActions(object):
             data={'username': username, 'password': password}
         )
 
-    
+
     def logout(self):
         """ Log out user """
         return self._client.get('/auth/logout')
@@ -74,8 +75,8 @@ class AuthActions(object):
 
 @pytest.fixture
 def auth(client):
-    """ With the auth fixture, you can call auth.login() in a test to log 
-        in as the test user, which was inserted as part of the test 
+    """ With the auth fixture, you can call auth.login() in a test to log
+        in as the test user, which was inserted as part of the test
         data in the app fixture.
     """
     return AuthActions(client)

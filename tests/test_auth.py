@@ -5,19 +5,19 @@ from flaskr.db import get_db
 
 
 def test_register(client, app):
-    """ Test user registration 
-        
+    """ Test user registration
+
         Make a GET request and return the Response object returned by Flask.
         To test that a page renders successfully, a simple request is made
         and checked for a 200 OK status_code. 500 Internal Server Error code
         is returned on failure.
 
         Make a POST request, converting the <data> dict into form data.
-        <headers> will have a <Location> header with the login URL when the 
+        <headers> will have a <Location> header with the login URL when the
         register view redirects to the login view.
         <data> contains the body of the response as bytes
-        
-        pytest.mark.parametrize tells Pytest to run the same test function 
+
+        pytest.mark.parametrize tells Pytest to run the same test function
         with different arguments.
         Tests different invalid input and error messages
     """
@@ -52,14 +52,14 @@ def test_login(client, auth):
         To test that a page renders successfully, a simple request is made
         and checked for a 200 OK status_code. 500 Internal Server Error code
         is returned on failure.
-        
+
         Rather than testing the data in the database, session should have
         user_id set ater logging in.
 
         Using <client> in a <with> block allows accessing context variables
         such as session after the response is returned.
 
-        pytest.mark.parametrize tells Pytest to run the same test function 
+        pytest.mark.parametrize tells Pytest to run the same test function
         with different arguments.
         Tests different invalid input and error messages
     """
@@ -83,7 +83,7 @@ def test_login_validate_input(auth, username, password, message):
 
 def test_logout(client, auth):
     """ Test user logout
-        
+
         Test that <user_id> is not in session after logout.
     """
     auth.login()

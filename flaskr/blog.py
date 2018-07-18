@@ -12,10 +12,10 @@ bp = Blueprint('blog', __name__)
 
 @bp.route('/')
 def index():
-    """ Define homepage endpoint 
+    """ Define homepage endpoint
 
-        The index will show all of the posts, most recent first. 
-        A JOIN is used so that the author information from the user 
+        The index will show all of the posts, most recent first.
+        A JOIN is used so that the author information from the user
         table is available in the result.
     """
     db = get_db()
@@ -31,11 +31,11 @@ def index():
 @login_required
 def create():
     """ Defines the 'create post' view.
-    
-        Either the form is displayed, or the posted data is validated and 
+
+        Either the form is displayed, or the posted data is validated and
         the post is added to the database or an error is shown.
-        
-        A user must be logged in to visit this view, 
+
+        A user must be logged in to visit this view,
         otherwise they will be redirected to the login page.
     """
     if request.method == 'POST':
@@ -61,14 +61,14 @@ def create():
 
 
 def get_post(id, check_author=True):
-    """ Fetch a post by <id> and check if the author matches 
+    """ Fetch a post by <id> and check if the author matches
         the logged in user.
     """
     post = get_db().execute(
-            'SELECT p.id, title, body, created, author_id, username'
-            ' FROM post p JOIN user u ON p.author_id = u.id'
-            ' WHERE p.id = ?', 
-            (id,)
+        'SELECT p.id, title, body, created, author_id, username'
+        ' FROM post p JOIN user u ON p.author_id = u.id'
+        ' WHERE p.id = ?',
+        (id,)
     ).fetchone()
     # Handle unkown/unathorized users by raising exceptions
     if post is None:
@@ -99,9 +99,9 @@ def update(id):
         else:
             db = get_db()
             db.execute(
-                    'UPDATE post SET title = ?, body = ?'
-                    ' WHERE id = ?',
-                    (title, body, id)
+                'UPDATE post SET title = ?, body = ?'
+                ' WHERE id = ?',
+                (title, body, id)
             )
             db.commit()
             return redirect(url_for('blog.index'))

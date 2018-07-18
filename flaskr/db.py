@@ -40,8 +40,8 @@ def close_db(e=None):
 
 
 def init_db():
-    """ Initialize a database 
-    
+    """ Initialize a database
+
         open_resource() opens a file relative to the flaskr package.
     """
     db = get_db()
@@ -53,8 +53,8 @@ def init_db():
 @click.command('init-db')
 @with_appcontext
 def init_db_command():
-    """ Clear the existing data and create new tables. 
-        
+    """ Clear the existing data and create new tables.
+
         click.command() defines a command line cmd called <init-db>
         that calls the init_db() function and shows a success msg to user.
     """
@@ -65,7 +65,7 @@ def init_db_command():
 def init_app(app):
     """ Register with the applcation.
 
-        The close_db() and init_db_command() functions need to be 
+        The close_db() and init_db_command() functions need to be
         registered with the appliction instance.
         Takes an application and does the registration
 

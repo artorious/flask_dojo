@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/artorious/flask_dojo.svg?branch=test-coverage)](https://travis-ci.org/artorious/flask_dojo)
 # [Flask Tutorials](http://flask.pocoo.org/docs/1.0/)
 
 ![](http://flask.pocoo.org/docs/1.0/_images/logo-full.png)

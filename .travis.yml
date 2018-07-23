@@ -7,4 +7,5 @@ install: "make"
 
 # command to run tests
 script:
-    - pytest     
+    - pytest coveralls
+

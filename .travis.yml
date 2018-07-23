@@ -5,6 +5,14 @@ python:
 # Command to install dependancies
 install: "make"
 
+before_script:
+    - pipenv shell
+
 # command to run tests
 script:
-    - pytest     
+    - pytest coveralls
+
+after_success:
+    - coveralls
+       
+

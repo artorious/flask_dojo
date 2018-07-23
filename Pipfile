@@ -15,6 +15,7 @@ pytest = "*"
 coverage = "*"
 pytest-cache = "*"
 "pytest-pep8" = "*"
+python-coveralls = "*"
 
 [requires]
 python_version = "3.5"

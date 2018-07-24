@@ -1,11 +1,17 @@
 language: python
 python:
+    - "2.7"
+    - "3.4"
     - "3.5"
+    - "3.6"
 
 # Command to install dependancies
 install: "make"
 
 # command to run tests
 script:
-  - pytest 
-  - coveralls     
+    - coverage run -m pytest
+
+after_success:
+    - coveralls
+      

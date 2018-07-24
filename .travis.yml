@@ -5,15 +5,7 @@ python:
 # Command to install dependancies
 install: "make"
 
-
-before_script:
-  - git clone https://github.com/z4r/python-coveralls-example.git
-  - cd python-coveralls-example
-  - git checkout -qf 17b8119796516195527dcb4f454a2ebd41d60244
-  - pytest example/tests.py --cov=example
-  - cd -
 # command to run tests
 script:
-  - pytest coveralls/tests.py --doctest-modules --pep8 coveralls -v --cov coveralls --cov-report term-missing
-after_success:
+  - pytest 
   - coveralls     

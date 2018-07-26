@@ -24,13 +24,12 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-
     @app.route('/hello')
     def hello():
         """ A siple page that says hello """
         return 'Hello World'
 
-    # Import and register the blueprint & database from the factory 
+    # Import and register the blueprint & database from the factory
     from . import db, auth, blog
     db.init_app(app)
     app.register_blueprint(auth.bp)

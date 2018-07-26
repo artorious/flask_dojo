@@ -108,7 +108,7 @@ def login():
 def load_logged_in_user():
     """ Runs before the view function no matter what URL is requested.
 
-        Checks if a <user_id> is stored in the <session> and gets that user's 
+        Checks if a <user_id> is stored in the <session> and gets that user's
         data from the database, storing it on <g.user>, which lasts for the
         length of the request.
     """
